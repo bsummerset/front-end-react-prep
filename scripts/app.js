@@ -13,14 +13,29 @@ example: as you type a username into a signup form, it tells you if that usernam
 2. fetch()
 3. render
 */
+
+async function main() {
+    const button = document.getElementById('new-joke');
+    button.addEventListener('click', async (event) => {
+        event. preventDefault();
+        const joke = await getJoke();
+        renderJoke(joke);
+    });
+}
+main();
+
+
+
 async function getJoke() {
 // Show the joke on the page:
 // 1. make the Request using fetch()
-fetch('https://icanhazdadjoke.com/', {
-    headers: {
-        Accept: 'application/json'
-    }
-});
+    const jokePromise = fetch('https://icanhazdadjoke.com/', {
+        headers: {
+            Accept: 'application/json'
+        }
+    });
+
+    const response = await jokePromise;
 // .then(response =>  {
 //     console.log(response);
 //     const pendingData = response.json();
@@ -37,16 +52,16 @@ fetch('https://icanhazdadjoke.com/', {
 // })
 // .catch(err => console.log(err))
 // 2. grab the .joke
-const jokeData = await response.json();
+    const jokeData = await response.json();
 // console.log(jokeData);
 // console.log(jokeData.joke);
 // 3. render it to the page
-return jokeData.joke
-}
+    return jokeData.joke;
+    }
 
-async function renderJoke(pytho) {
+async function renderJoke(joke) {
     // async because we will await getJoke
-    const joke = await getJoke();
+    // const joke = await getJoke();
 
     // create the DOM element
     const p = document.createElement('p');
