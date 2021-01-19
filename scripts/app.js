@@ -68,5 +68,5 @@ async function renderJoke(joke) {
     // put the joke text into it
     p.textContent = joke;
     // attach it to an existing DOM element
-    document.getElementById('root').appendChild(p);
+    document.querySelector('root').appendChild(p);
 }
